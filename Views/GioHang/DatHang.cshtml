@@ -1,0 +1,126 @@
+﻿@using NguyenChiTrung_ShopYAME.Models
+@{
+    ViewBag.Title = "DatHang";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<div class="container-fluid bg-secondary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+        <h1 class="font-weight-semi-bold text-uppercase mb-3">Đặt Hàng</h1>
+        <div class="d-inline-flex">
+            <p class="m-0"><a href="">Trang Chủ</a></p>
+            <p class="m-0 px-2">-</p>
+            <p class="m-0">Đặt Hàng</p>
+        </div>
+    </div>
+</div>
+<div class="container-fluid pt-5">
+    <div class="row px-xl-5">
+        <div class="col-lg-8">
+            <div class="mb-4">
+                <h4 class="font-weight-semi-bold mb-4">THÔNG TIN ĐẶT HÀNG</h4>
+                @{
+                    KHACHHANG kh = (KHACHHANG)Session["TaiKhoan"];
+                }
+
+                @using (Html.BeginForm())
+                {
+                    @Html.ValidationSummary(true)
+                    <div class="col-md-6 form-group">
+                        <label>Họ tên khách hàng:</label>
+                        <input class="form-control" type="text" placeholder="@kh.HoTen">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Địa chỉ</label>
+                        <input class="form-control" type="text" placeholder="@kh.DiaChi">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Số điện thoại</label>
+                        <input class="form-control" type="text" placeholder="@kh.DienThoai">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Ngày đặt</label>
+                        <input class="form-control" type="text" placeholder="@DateTime.Now.ToShortDateString()">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Ngày giao</label>
+                        <input class="form-control" type="date" name="NgayGiao" />
+                    </div>
+                    <div class="card-footer border-secondary bg-transparent">
+                        <label></label>
+                        <input class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3" type="submit" value="ĐẶT HÀNG" />
+                    </div>
+                }
+
+
+            </div>
+                
+        </div>
+                
+        <div class="col-lg-4">
+            <div class="card border-secondary mb-5">
+                <div class="card-header bg-secondary border-0">
+                    <h4 class="font-weight-semi-bold m-0">THÔNG TIN ĐƠN HÀNG</h4>
+                </div>
+                <div class="card-body">
+                    <h5 class="font-weight-medium mb-3">Các sản phẩm</h5>
+                    @foreach (var item in Model)
+                    {
+                <div class="d-flex justify-content-between">
+
+                    <p style="width:200px">@item.sTenSanPham</p>
+
+
+                    @using (Html.BeginForm("CapNhatGioHang", "GioHang", new { iMaSanPham = item.iMaSanPham }))
+                    {
+
+                        <p align="center">@string.Format("{0:#,##0,0}", @item.dThanhTien).000VNĐ</p>
+                    }
+                </div>
+                    }
+                    <hr class="mt-0">
+                    <div class="d-flex justify-content-between mb-3 pt-1">
+                        <h6 class="font-weight-medium">Tổng số lượng:</h6>
+                        <h6 class="font-weight-medium">@string.Format("{0:#,##0}", @ViewBag.TongSoLuong)</h6>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <h6 class="font-weight-medium">Tổng tiền:</h6>
+                        <h6 class="font-weight-medium">@string.Format("{0:#,##0,0}", @ViewBag.TongTien).000 VNĐ</h6>
+                    </div>
+                </div>
+                <div class="card-footer border-secondary bg-transparent">
+                    <div class="d-flex justify-content-between mt-2">
+                        <h5 class="font-weight-bold">Tổng tiền:</h5>
+                        <h5 class="font-weight-bold">@string.Format("{0:#,##0,0}", @ViewBag.TongTien).000 VNĐ</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="card border-secondary mb-5">
+                <div class="card-header bg-secondary border-0">
+                    <h4 class="font-weight-semi-bold m-0">Thanh Toán</h4>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" name="payment" id="paypal">
+                            <label class="custom-control-label" for="paypal">Tiền mặt</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" name="payment" id="directcheck">
+                            <label class="custom-control-label" for="directcheck">Momo</label>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" name="payment" id="banktransfer">
+                            <label class="custom-control-label" for="banktransfer">Zalopay</label>
+                        </div>
+                    </div>
+                </div>
+
+               
+            </div>
+        </div>
+    </div>
+</div>

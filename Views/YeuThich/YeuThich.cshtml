@@ -1,0 +1,96 @@
+﻿
+@using NguyenChiTrung_ShopYAME.Models
+@model List<CHITIETSANPHAM>
+@{
+    ViewBag.Title = "GioHang";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<style>
+    #mydiv a {
+        color:black;
+       text-decoration:none;         
+    }
+</style>
+<!-- Page Header Start -->
+<div class="container-fluid bg-secondary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+        <h1 class="font-weight-semi-bold text-uppercase mb-3"><a style="text-decoration:none" href="@Url.Action("YeuThich","YeuThich")">YÊU THÍCH</a></h1>
+        <div class="d-inline-flex">
+            <p class="m-0"><a style="text-decoration:none" href="@Url.Action("Index","Home")">TRANG CHỦ</a></p>
+            <p class="m-0 px-2">-</p>
+            <p class="m-0" ><a style="text-decoration:none" href="@Url.Action("YeuThich","YeuThich")">YÊU THÍCH</a></p>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+<div class="container-fluid pt-5">
+    <div class="row px-xl-5">
+        <div class="col-lg-8 table-responsive mb-5">
+            <table class="table table-bordered text-center mb-0">
+                <thead class="bg-secondary text-dark">
+                    <tr>
+                        <td>Mã Sản Phẩm</td>
+                        <td>Tên Sản Phẩm</td>
+                        <td>Ảnh Bìa </td>
+                        <td>Đơn Giá </td>
+                    </tr>
+                </thead>
+                <tbody class="align-middle">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td align="center">@item.MaSanPham</td>
+                            <td>@item.TenSanPham</td>
+                            <td><img src="~/img/@item.AnhBia" style="width:100px;"></td>
+                            @using (Html.BeginForm("CapNhatYeuThich", "YeuThich", new { iMaSanPham = item.MaSanPham }))
+                            {
+                                <td align="center"> @string.Format("{0:#,##0,0}", @item.GiaBan).000 </td>
+                                <td id="mydiv">
+                                    <form class="mb-5" action="">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control p-4" placeholder="">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary">
+                                                    <div id="mydiv">
+                                                        <a href="@Url.Action("ChiTietSanPham","Home", new { id =
+    item.MaSanPham})" class="linkhover">ChiTiet</a>
+                                                    </div>
+
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </td>
+                                <td id="mydiv">
+                                    <form class="mb-5" action="">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control p-4" placeholder="">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary">
+                                                    <div id="mydiv"> @Html.ActionLink("Xóa", "XoaSPKhoiYeuThich", new { @iMaSanPham = item.MaSanPham })</div>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-4">
+            <form class="mb-5" action="">
+                <div class="input-group">
+                    <input type="text" class="form-control p-4" placeholder="">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary">
+                            <div id="mydiv">@Html.ActionLink("XÓA TOÀN BỘ SẢN PHẦM", "XoaYeuThich")</div>
+                                 
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>

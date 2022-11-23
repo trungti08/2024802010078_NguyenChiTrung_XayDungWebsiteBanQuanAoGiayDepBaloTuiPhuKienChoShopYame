@@ -1,0 +1,57 @@
+﻿@model IEnumerable<NguyenChiTrung_ShopYAME.Models.DONDATHANG>
+@{
+    ViewBag.Title = "DonHang";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<div class="container-fluid bg-secondary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+        <h1 class="font-weight-semi-bold text-uppercase mb-3">Shopping Cart</h1>
+        <div class="d-inline-flex">
+            <p class="m-0"><a href="">Home</a></p>
+            <p class="m-0 px-2">-</p>
+            <p class="m-0">Shopping Cart</p>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<div class="container-fluid pt-5">
+    <div class="row px-xl-5">
+        <div class="col-lg-8 table-responsive mb-5">
+            <table class="table table-bordered text-center mb-0">
+                <thead class="bg-secondary text-dark">
+                    <tr>
+                        <td>Mã Sản Phẩm</td>
+                        <td>Tên Sản Phẩm</td>
+                        <td>Ảnh Bìa </td>
+                        <td>Số Lượng</td>
+                        <td>Đơn Giá </td>
+                        <td>Thành Tiền</td>
+                    </tr>
+                </thead>
+                <tbody class="align-middle">
+  
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.MaDonHang</td>
+                                    <td>@item.DaThanhToan</td>
+                                    <td>@item.TinhTrangGiaoHang</td>
+                                    <td>@item.NgayDat</td>
+                                    <td>@item.NgayGiao</td>
+                                    <td>@item.MaKhachHang</td>
+                                </tr>
+                            }
+
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+

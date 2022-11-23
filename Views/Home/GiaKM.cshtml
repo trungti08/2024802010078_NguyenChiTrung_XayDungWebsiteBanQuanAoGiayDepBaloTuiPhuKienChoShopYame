@@ -1,0 +1,5 @@
+﻿@model IEnumerable<NguyenChiTrung_ShopYAME.Models.KHUYENMAI>
+@foreach (var sp in Model)
+{
+    @Html.FormatValue(@sp.GiaTriKM, "{0:0}")
+        }

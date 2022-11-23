@@ -1,0 +1,155 @@
+﻿
+@using NguyenChiTrung_ShopYAME.Models
+@model List<Giohang>
+@{
+    ViewBag.Title = "GioHang";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<style>
+
+    #mydiv a {
+        color:black;
+        text-decoration:none;
+    }
+</style>
+<!-- Page Header Start -->
+<div class="container-fluid bg-secondary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+        <h1 class="font-weight-semi-bold text-uppercase mb-3"><a href="@Url.Action("GioHang","GioHang")" style="text-decoration:none">GIỎ HÀNG</a></h1>
+        <div class="d-inline-flex">
+            <p class="m-0"><a href="@Url.Action("Index","Home")" style="text-decoration:none">TRANG CHỦ</a></p>
+            <p class="m-0 px-2">-</p>
+            <p class="m-0"><a href="@Url.Action("GioHang","GioHang")" style="text-decoration:none">GIỎ HÀNG</a></p>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+<div class="container-fluid pt-5">
+    <div class="row px-xl-5">
+        <div class="col-lg-8 table-responsive mb-5">
+            <table class="table table-bordered text-center mb-0">
+                <thead class="bg-secondary text-dark">
+                    <tr>
+                        <td>Mã Sản Phẩm</td>
+                        <td>Tên Sản Phẩm</td>
+                        <td>Ảnh Bìa </td>
+                        <td>Số Lượng</td>
+                        <td>Đơn Giá </td>
+                        <td>Thành Tiền</td>
+                    </tr>
+                </thead>
+                <tbody class="align-middle">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td align="center">@item.iMaSanPham</td>
+                            <td>@item.sTenSanPham</td>
+                            <td><img src="~/img/@item.sAnhBia" style="width:100px;"></td>
+                            @using (Html.BeginForm("CapNhatGioHang", "GioHang", new { iMaSanPham = item.iMaSanPham }))
+                            {
+                                <td align="center">
+                                    <div class="input-group quantity mr-3" style="width: 130px;">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-primary btn-minus">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+                                        </div>
+                                        <input type="text" min="1" name="txtSoLuong" class="form-control bg-secondary text-center" value="@item.iSoLuong">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-primary btn-plus">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                   
+                                </td>
+                                <td align="center"> @string.Format("{0:#,##0,0}", @item.dDonGia).000 </td>
+                                <td align="center"> @string.Format("{0:#,##0,0}", @item.dThanhTien).000 </td>
+                                <td id="mydiv">
+                                    <form class="mb-5">
+                                        <div class="input-group">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" style="width:90px">
+                                                    <a href="@Url.Action("ChiTietSanPham","Home", new { id =
+    item.iMaSanPham})" class="linkhover">ChiTiet</a>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                           </td>
+
+
+                                <td id="mydiv">
+                                    <form class="mb-5">
+                                        <div class="input-group">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary"> @Html.ActionLink("Xóa", "XoaSPKhoiGioHang", new { @iMaSanPham = item.iMaSanPham })</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    
+                                </td>
+                                <td>
+                                    <form class="mb-5">
+                                        <div class="input-group">
+                                            <div class="input-group-append">
+                                                 <input class="btn btn-primary" type="submit" value="Cập nhật" />
+                                            </div>
+                                        </div>
+                                    </form>
+                                </td>
+
+                            }
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+        <div class="col-lg-4">
+    
+            <div class="card border-secondary mb-5">
+                <div class="card-header bg-secondary border-0">
+                    <h4 class="font-weight-semi-bold m-0">THANH TOÁN</h4>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-3 pt-1">
+                        <h6 class="font-weight-medium">Tổng số lượng:</h6>
+                        <h6 class="font-weight-medium">@string.Format("{0:#,##0}", @ViewBag.TongSoLuong)</h6>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <h6 class="font-weight-medium">Tổng tiền:</h6>
+                        <h6 class="font-weight-medium">@string.Format("{0:#,##0,0}", @ViewBag.TongTien).000 VNĐ</h6>
+                    </div>
+                </div>
+                <div class="card-footer border-secondary bg-transparent">
+                    <div class="d-flex justify-content-between mt-2">
+                        <h5 class="font-weight-bold">Tổng tiền:</h5>
+                        <h5 class="font-weight-bold">@string.Format("{0:#,##0,0}", @ViewBag.TongTien).000 VNĐ</h5>
+                    </div>
+                    <br />
+                    <div id="mydiv" >
+                        
+                        <form class="mb-5">
+                            <div class="input-group">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary">@Html.ActionLink("Xóa giỏ hàng", "XoaGioHang")</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="mydiv">
+                        
+                        <form class="mb-5">
+                            <div class="input-group">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary">@Html.ActionLink("ĐẶT HÀNG", "DatHang", "GioHang")</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>

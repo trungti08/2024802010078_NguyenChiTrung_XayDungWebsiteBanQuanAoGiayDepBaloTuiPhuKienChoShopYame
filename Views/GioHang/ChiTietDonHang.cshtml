@@ -1,0 +1,53 @@
+﻿@model IEnumerable<NguyenChiTrung_ShopYAME.Models.DONDATHANG>
+
+@{
+    ViewBag.Title = "ChiTietDonHang";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<div class="container">
+    <h2 style="font-family:Arial;">Lịch sử giao hàng</h2>
+    <div class="col-lg-9 col-md-9">
+        <table class="table">
+            <tr style="text-align:center;">
+                <th>
+                    Mã Đơn Hàng
+                </th>
+                <th>
+                    Tình trạng thanh toán
+                </th>
+                <th>
+                    Tình trạng giao hàng
+                </th>
+                <th>
+                    Ngày Đặt
+                </th>
+                <th>
+                    Ngày Giao
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr style="text-align:center">
+                    <td>
+                        <a href="#"><label>@Html.DisplayFor(modelItem => item.MaDonHang)</label></a>
+                    </td>
+                    <td>
+                        <input name="DaGiaoHang" type="text" value="Chưa hoàn tất">
+                    </td>
+                    <td>
+                        <input name="TinhTrangGiaoHang" type="text" value="Đang vận chuyển">
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NgayDat)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NgayGiao)
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>

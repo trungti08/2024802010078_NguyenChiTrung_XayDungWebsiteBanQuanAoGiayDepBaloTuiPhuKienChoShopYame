@@ -1,0 +1,45 @@
+﻿@model IEnumerable<NguyenChiTrung_ShopYAME.Models.SANPHAM>
+
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    ViewBag.Title = "Search";
+}
+
+
+@{
+    if (Model != null)
+    {
+        <div class="row text-center">
+            @foreach (var sp in Model)
+            {
+                <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6">
+                    <div class="thumbnail">
+                        <a href="@Url.Action("ChiTietSanPham","Home", new { id =
+sp.MaSanPham})" class="linkhover">
+                            <img src="~/img/@sp.AnhBia" alt="Thumbnail Image 1" class="img-responsive img-rounded imgspmoi">
+                        </a>
+                        <div class="caption">
+                            <h4 style="min-height:70px">
+                                <a href="@Url.Action("ChiTietSanPham","Home", new { id =
+sp.MaSanPham})" class="linkhover">@sp.TenSanPham</a>
+</h4>
+<h6>@Html.FormatValue(@sp.GiaBan, "{0:0}").000 VNĐ</h6><h6 class="text-muted ml-2"><del>@Html.FormatValue(@sp.GiaBan * 2, "{0:0}").000 VNĐ</del></h6>
+<p>
+
+    <a href="@Url.Action("ChiTietSanPham","Home", new { id =
+sp.MaSanPham})">
+        <span class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</span>
+    </a>
+    <a href="@Url.Action("ThemGioHang","GioHang", new { ms = sp.MaSanPham, url =
+Request.Url.ToString() })
+" class="btn btn-primary" role="button">
+        <span class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</span>
+    </a>
+</p>
+</div>
+</div>
+</div>
+}
+        </div>
+    }
+}

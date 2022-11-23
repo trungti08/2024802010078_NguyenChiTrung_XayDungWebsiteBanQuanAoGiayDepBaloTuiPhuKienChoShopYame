@@ -1,0 +1,97 @@
+﻿
+@using NguyenChiTrung_ShopYAME.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<SANPHAM>
+@{
+    ViewBag.Title = "TRANG CHỦ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    .imgspmoi {
+        transition: all 1s ease-in;
+        width: 350px;
+    }
+
+        .imgspmoi:hover {
+            transform: scale(0.9);
+            cursor: pointer;
+        }
+
+    .linkhover:hover {
+        color: red;
+        text-decoration: none;
+    }
+</style>
+<a href="" class="nav-item nav-link">
+    <h2 class="text-center">
+        Top sản phẩm HOT
+    </h2>
+</a>
+<a href="" class="nav-item nav-link">
+    <h2 class="text-center">
+        Những sản phẩm thời trang mới nhất/Hot nhất
+    </h2>
+</a>
+<hr>
+
+<div class="row text-center">
+    @foreach (var sp in Model)
+    {
+
+        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6">
+            <div class="thumbnail">
+                <a href="@Url.Action("ChiTietSanPham","Home", new { id =
+sp.MaSanPham})" class="linkhover">
+                    <img src="~/img/@sp.AnhBia" alt="Thumbnail Image 1" class="img-responsive img-rounded imgspmoi">
+                </a>
+                <div class="caption">
+                    <h4 style="min-height:70px">
+                        <a href="@Url.Action("ChiTietSanPham","Home", new { id =
+sp.MaSanPham})" class="linkhover">@sp.TenSanPham</a>
+</h4>
+<h6>
+    @Html.Action("GiaKM", "Home", new
+{
+id =
+sp.MaSanPham
+}).000 VNĐ
+</h6><h6 class="text-muted ml-2"><del>@Html.FormatValue(@sp.GiaBan * 2, "{0:0}").000 VNĐ</del></h6>
+<p>
+
+    <a href="@Url.Action("ChiTietSanPham","Home", new { id =
+sp.MaSanPham})">
+        <span class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>@sp.LuotXem</span>
+    </a>
+    <a href="@Url.Action("ThemGioHang","GioHang", new { ms = sp.MaSanPham, url =
+Request.Url.ToString() })
+" class="btn btn-primary" role="button">
+        <span class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</span>
+    </a>
+    <a href="@Url.Action("ThemYeuThich","YeuThich", new { ms = sp.MaSanPham, url =
+Request.Url.ToString() })
+" class="btn btn-primary" role="button">
+        <span class="btn btn-sm text-dark p-0"> <i class="fas fa-heart text-primary"></i>Add To Favorite</span>
+    </a>
+</p>
+</div>
+</div>
+</div>
+}
+</div>
+Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount
+<div class="MT">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new
+{
+ page = page
+}))
+</div>
+<style>
+    .MT {
+        display: inline;
+        text-align: center;
+    }
+</style>
+
+
+
+

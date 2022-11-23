@@ -1,0 +1,75 @@
+﻿
+@using NguyenChiTrung_ShopYAME.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<SANPHAM>
+@{
+    ViewBag.Title = "Sản phẩm theo loai";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<style type="text/css">
+    .imgbook {
+        transition: all 1s ease-in;
+        width: 400px;
+    }
+
+        .imgbook:hover {
+            transform: scale(0.9);
+            cursor: pointer;
+        }
+</style>
+<hr>
+<div class="row text-center">
+    @foreach (var sp in Model)
+    {
+        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6">
+            <div class="thumbnail">
+                <img src="~/img/@sp.AnhBia" alt="@sp.TenSanPham" class="img-responsive img-rounded imgbook">
+                <div class="caption">
+                    <h4 style="min-height:70px;">
+                        <a href="@Url.Action("ChiTietSanPham","Home", new { id = sp.MaSanPham})">@sp.TenSanPham</a>
+                    </h4>
+                    <h6>
+                        @Html.Action("GiaKM", "Home", new
+{
+id =
+sp.MaSanPham
+}).000 VNĐ
+                    </h6><h6 class="text-muted ml-2"><del>@Html.FormatValue(@sp.GiaBan, "{0:0}").000 VNĐ</del></h6>
+                         <p>
+
+                             <a href="@Url.Action("ChiTietSanPham","Home", new { id =
+sp.MaSanPham})">
+                                 <span class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</span>
+                             </a>
+                             <a href="@Url.Action("ThemGioHang","GioHang", new { ms = sp.MaSanPham, url =
+Request.Url.ToString() })
+" class="btn btn-primary" role="button">
+                                 <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Add to Cart
+                             </a>
+                             <a href="@Url.Action("ThemYeuThich","YeuThich", new { ms = sp.MaSanPham, url =
+Request.Url.ToString() })
+" class="btn btn-primary" role="button">
+                                 <span class="btn btn-sm text-dark p-0"> <i class="fas fa-heart text-primary"></i>Add To Favorite</span>
+                             </a>
+                         </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount
+<div class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("SanPhamTheoLoai", new
+    {
+        id =
+   ViewBag.MaLoaiSanPham,
+        page = page
+    }))
+</div>
+<style>
+    .MenuTrang {
+        display: inline;
+        text-align: center;
+    }
+</style>

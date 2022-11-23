@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "LienHe";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<style>
+    #lienhe{
+        width:1400px;
+    }
+</style>
+<div class="container-fluid bg-secondary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+        <h1 class="font-weight-semi-bold text-uppercase mb-3"><a style="text-decoration:none" href="@Url.Action("LienHe","Home")">LIÊN HỆ CHÚNG TÔI</a></h1>
+        <div class="d-inline-flex">
+            <p class="m-0"><a style="text-decoration:none" href="@Url.Action("Index","Home")">TRANG CHỦ</a></p>
+            <p class="m-0 px-2">-</p>
+            <p class="m-0"><a style="text-decoration:none" href="@Url.Action("LienHe","Home")">LIÊN HỆ</a></p>
+        </div>
+    </div>
+</div>
+<img id="lienhe" src="~/img/lienhe.png" />
+<!-- Page Header End -->
+<!-- Contact Start -->
+<div class="container-fluid pt-5">
+    <div class="text-center mb-4">
+        <h2 class="section-title px-5"><span class="px-2"><a style="text-decoration:none" href="@Url.Action("LienHe","Home")">BẠN CÓ THỂ SỬ DỤNG GOOGLE MAP</a></span></h2>
+    </div>
+
+   
+    <iframe id="lienhe" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d250779.7563057053!2d106.50392474534088!3d10.85458133845362!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1668052009343!5m2!1svi!2s" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
