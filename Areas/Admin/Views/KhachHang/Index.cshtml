@@ -1,0 +1,80 @@
+﻿@model IEnumerable<NguyenChiTrung_ShopYAME.Models.KHACHHANG>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="card mt-3">
+    <div class="card-content">
+        <div class="row row-group m-0">
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">QUẢN LÝ THÔNG TIN KHÁCH HÀNG</h1>
+                <a href="@Url.Action("Create", "KhachHang")" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                    <i class="fas fa-download fa-sm text-white-50"></i>THÊM MỚI
+                </a>
+            </div>
+            <table class="table" style="font-weight:bolder">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.HoTen)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TaiKhoan)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.MatKhau)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DiaChi)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DienThoai)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NgaySinh)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HoTen)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TaiKhoan)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MatKhau)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DiaChi)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DienThoai)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NgaySinh)
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Edit", new { id = item.MaKhachHang })" class="btn btn-warning" role="button">Sửa</a>
+                        </td>
+                        <td style="width:101px">
+                            <a href="@Url.Action("Details", new { id = item.MaKhachHang })" class="btn btn-primary" role="button">Chi tiết</a>
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Delete", new { id = item.MaKhachHang })" class="btn btn-danger" role="button">Xóa</a>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+            </div></div></div>

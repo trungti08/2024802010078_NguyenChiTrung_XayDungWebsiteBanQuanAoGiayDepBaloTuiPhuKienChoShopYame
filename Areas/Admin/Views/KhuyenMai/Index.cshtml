@@ -1,0 +1,80 @@
+﻿@using NguyenChiTrung_ShopYAME.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<NguyenChiTrung_ShopYAME.Models.KHUYENMAI>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="clearfix"></div>
+
+    <div class="content-wrapper">
+        <div class="container-fluid">
+
+            <!--Start Dashboard Content-->
+
+            <div class="card mt-3">
+                <div class="card-content">
+                    <div class="row row-group m-0">
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800">QUẢN LÝ THÔNG TIN KHUYẾN MÃI</h1>
+                            <a href="@Url.Action("Create", "KhuyenMai")" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                <i class="fas fa-download fa-sm text-white-50"></i>THÊM MỚI
+                            </a>
+                        </div>
+                        <table class="table" style="font-weight:bolder">
+                            <tr>
+                                <th style="text-align:center;width:340px">
+                                    Hình ảnh
+                                </th>
+                                <th style="text-align:center;width:200px">
+                                    Mã sản phẩm
+                                </th>
+                                <th style="text-align:center;width:200px">
+                                    Giá Khuyến mãi
+                                </th>
+                                <th></th>
+                            </tr>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <img src="~/img/KM/@item.HinhKM" style="width:300px;height:400px" />
+                                    </td>
+                                    <td style="text-align:center;width:200px">
+                                        @Html.DisplayFor(modelItem => item.MaSanPham)
+                                    </td>
+                                    <td style="text-align:center;width:200px">
+                                        @Html.DisplayFor(modelItem => item.GiaTriKM)
+                                    </td>
+                                    <td>
+                                        <a href="@Url.Action("Edit", new { id = item.MaKM })" class="btn btn-warning" role="button">Sửa</a>
+
+                                        <a href="@Url.Action("Details", new { id = item.MaKM })" class="btn btn-primary" role="button">Chi tiết</a>
+
+                                        <a href="@Url.Action("Delete", new { id = item.MaKM })" class="btn btn-danger" role="button">Xóa</a>
+                                    </td>
+                                </tr>
+                            }
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*Tạo liên kết phần trang*@
+        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+        <div class="MenuTrang">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+        </div>
+        <style>
+            .MenuTrang {
+                display: inline;
+                text-align: center;
+            }
+        </style>

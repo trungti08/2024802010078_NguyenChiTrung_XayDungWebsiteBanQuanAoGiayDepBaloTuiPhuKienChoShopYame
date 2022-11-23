@@ -1,0 +1,43 @@
+﻿@model NguyenChiTrung_ShopYAME.Models.KHUYENMAI
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>KHUYENMAI</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HinhKM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HinhKM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaSanPham)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaSanPham)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GiaTriKM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiaTriKM)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MaKM }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,74 @@
+﻿@model IEnumerable<NguyenChiTrung_ShopYAME.Models.DONDATHANG>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="clearfix"></div>
+
+    <div class="content-wrapper">
+        <div class="container-fluid">
+
+            <!--Start Dashboard Content-->
+
+            <div class="card mt-3">
+                <div class="card-content">
+                    <div class="row row-group m-0">
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800">QUẢN LÝ THÔNG TIN ĐƠN HÀNG</h1>
+                            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                <i class="fas fa-download fa-sm text-white-50"></i>THÊM MỚI
+                            </a>
+                        </div>
+                        <table class="table" style="font-weight:bolder">
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.DaThanhToan)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.TinhTrangGiaoHang)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.NgayDat)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.NgayGiao)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.MaKhachHang)
+                                </th>
+                                <th></th>
+                            </tr>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DaThanhToan)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TinhTrangGiaoHang)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NgayDat)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NgayGiao)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MaKhachHang)
+                                    </td>
+                                    <td>
+                                        <a href="@Url.Action("Edit", new { id = item.MaDonHang })" class="btn btn-warning" role="button">Sửa</a>
+
+                                        <a href="@Url.Action("Details", new { id = item.MaDonHang })" class="btn btn-primary" role="button">Chi tiết</a>
+
+                                        <a href="@Url.Action("Delete", new { id = item.MaDonHang })" class="btn btn-danger" role="button">Xóa</a>
+                                    </td>
+                                </tr>
+                            }
+
+                        </table>
+                        </div></div></div></div></div></div>
